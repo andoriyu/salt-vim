@@ -1,11 +1,11 @@
-function! DetectSls()
+autocmd BufNewFile,BufRead *.sls,Saltfile  call s:DetectSls()
+
+fun! s:DetectSls()
   if !did_filetype()
     if match(getline(1), '^#!py') > -1
-      set ft=python
+      execute "set filetype=python"
     else
-      set ft=sls
+      execute "set filetype=sls"
     endif
   endif
 endfunction
-
-:au BufNewFile,BufRead *.sls,Saltfile call DetectSls()
